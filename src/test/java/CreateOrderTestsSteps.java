@@ -16,13 +16,7 @@ public class CreateOrderTestsSteps {
     }
 
     @Step("Создать заказ с ингридиентами")
-    public Response createOrder(List<String> ingredients, String token) {
-        ingredients.replaceAll(s -> "\"" + s + "\"");
-        return stellarburgersApi.createOrder("{\"ingredients\": "+ingredients+"}", token);
-    }
-
-    @Step("Создать заказ без ингридиентов")
-    public Response createOrder(String ingredients,String token) {
-        return stellarburgersApi.createOrder("{\"ingredients\":\""+ingredients+"\" }", token);
+    public Response createOrder(Object ingredients, String token) {
+        return stellarburgersApi.createOrder(ingredients, token);
     }
 }

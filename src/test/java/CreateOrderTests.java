@@ -18,27 +18,27 @@ public class CreateOrderTests {
 
     @Test
     public void createOrderWithoutAuthorizationTest() {
-        Response createOrder = createOrderTestsSteps.createOrder(createOrderTestsSteps.getIdIngredients(), "");
+        Response createOrder = createOrderTestsSteps.createOrder(CreateIngredientsTestData.validIngridientsList(createOrderTestsSteps.getIdIngredients()), "");
         createOrder.then().statusCode(200);
         assertTrue(createOrder.jsonPath().get("success"));
     }
 
     @Test
     public void createOrderWithAuthorizationTest() {
-        Response createOrder = createOrderTestsSteps.createOrder(createOrderTestsSteps.getIdIngredients(), userTestsSteps.getTokenUser());
+        Response createOrder = createOrderTestsSteps.createOrder(CreateIngredientsTestData.validIngridientsList(createOrderTestsSteps.getIdIngredients()), userTestsSteps.getTokenUser());
         createOrder.then().statusCode(200);
         assertEquals(CreateUserTestData.bodyStandartUser().getEmail(), createOrder.jsonPath().getString("order.owner.email"));
     }
 
     @Test
     public void createOrderWithoutIngredientsTest() {
-        Response createOrder = createOrderTestsSteps.createOrder("","");
+        Response createOrder = createOrderTestsSteps.createOrder(CreateIngredientsTestData.emptyIngridientsList(),"");
         createOrder.then().statusCode(400);
     }
 
     @Test
     public void createOrderWithWrongIngredientsTest() {
-        Response createOrder = createOrderTestsSteps.createOrder("324dfsc32ds342","");
+        Response createOrder = createOrderTestsSteps.createOrder(CreateIngredientsTestData.unvalidIngridientsList(),"");
         createOrder.then().statusCode(500);
     }
 

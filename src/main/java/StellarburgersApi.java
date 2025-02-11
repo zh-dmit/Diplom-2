@@ -26,7 +26,7 @@ public class StellarburgersApi extends BaseHttpClient {
         return doPatchRequest(pathPatchUser, object, token);
     }
 
-    public Response createOrder(String body, String token) {
+    public Response createOrder(Object body, String token) {
         return doPostRequest(pathGetPathCreateOrder, body, token);
     }
 

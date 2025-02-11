@@ -41,7 +41,7 @@ public abstract class BaseHttpClient {
                 .thenReturn();
     }
 
-    protected Response doPostRequest(String path, String body, String token) {
+    protected Response doPostRequest(String path, Object body, String token) {
         return given()
                 .spec(baseRequestSpec)
                 .header("Authorization", token)
